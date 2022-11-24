@@ -1,6 +1,5 @@
 import React, { Component, Children, cloneElement } from 'react';
-import { View, ViewPropTypes } from 'react-native';
-import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import { pick, isNull } from 'underscore';
 import { setNativeEvents, removeNativeEvents,  OT } from './OT';
 import { sanitizeSessionEvents, sanitizeSessionOptions, sanitizeSignalData,
@@ -111,20 +110,6 @@ export default class OTSession extends Component {
     return <View />;
   }
 }
-
-OTSession.propTypes = {
-  apiKey: PropTypes.string.isRequired,
-  sessionId: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
-  style: ViewPropTypes.style,
-  eventHandlers: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  options: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  signal: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
 
 OTSession.defaultProps = {
   eventHandlers: {},
