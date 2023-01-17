@@ -104,7 +104,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                         return useTextureViews;
                     }
 
-                    @Override
+                    // @Override
                     public boolean isCamera2Capable() {
                         return isCamera2Capable;
                     }
