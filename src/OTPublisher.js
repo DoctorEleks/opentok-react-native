@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { View, Platform } from 'react-native';
 import { isNull } from 'underscore';
 import {
@@ -167,12 +166,7 @@ class OTPublisher extends Component {
     return <View />;
   }
 }
-const viewPropTypes = View.propTypes;
-OTPublisher.propTypes = {
-  ...viewPropTypes,
-  properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  eventHandlers: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
+
 OTPublisher.defaultProps = {
   properties: {},
   eventHandlers: {},

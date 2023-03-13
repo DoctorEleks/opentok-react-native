@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Platform } from 'react-native';
-import PropTypes from 'prop-types';
 import { isNull, isUndefined, each, isEqual, isEmpty } from 'underscore';
 import { OT, nativeEvents, setNativeEvents, removeNativeEvents } from './OT';
 import OTSubscriberView from './views/OTSubscriberView';
@@ -111,17 +110,6 @@ export default class OTSubscriber extends Component {
     return this.props.children(this.state.streams) || null;
   }
 }
-
-const viewPropTypes = View.propTypes;
-OTSubscriber.propTypes = {
-  ...viewPropTypes,
-  children: PropTypes.func,
-  properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  eventHandlers: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  streamProperties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  containerStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  subscribeToSelf: PropTypes.bool
-};
 
 OTSubscriber.defaultProps = {
   properties: {},
