@@ -1,3 +1,36 @@
+# 0.21.2 (February 14, 2023)
+
+- [Update]: iOS SDK to 2.23.1 and Android to 2.23.1
+- [Fix]: Fix video freeze issue in Android 13 simulator (API level 33) - issue #628
+
+# 0.21.1 (Oct 14, 2022)
+
+- [Update]: iOS SDK to 2.23.1 and Android to 2.23.1
+- [Update]: min target for iOS is now 12.0
+
+# 0.21.0 (June 14, 2022)
+
+- [Update]: Add DTX Option for Publisher
+- [Update]: Android Native SDK to 2.22.3 and iOS to 2.22.3
+
+# 0.20.3 (May 18, 2022)
+
+- [Fix]: Updates from DependatBot
+
+# 0.20.2 (May 16, 2022)
+
+- [Update]: Readme file update with Bintray instructions
+- [Update]: Android Native SDK to 2.21.5 and iOS to 2.21.3
+- [Fix]: Typescrit types fixed audioLevel
+
+# 0.20.1 (Jan 28, 2022)
+- [Update]: Add Content Hint API on the OTPublisher object
+- [Update]: Add timestamp property on the audioNetworkStats and videoNetworkStats
+- [Fix]: Bump `opentok-react-native` version to 
+
+# 0.20.0 (Jan 26, 2022)
+- [Update]: update SDKs iOS to 2.21.3 and Android to 2.21.4 
+
 # 0.19.0 (Oct 11, 2021)
 - [Update]: update SDKs Android to 2.20.2
 - [Update]: added IceConfig options in the Session Options object

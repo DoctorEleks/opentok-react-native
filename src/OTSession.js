@@ -1,5 +1,6 @@
 import React, { Component, Children, cloneElement } from 'react';
 import { View } from 'react-native';
+
 import { pick, isNull } from 'underscore';
 import { setNativeEvents, removeNativeEvents,  OT } from './OT';
 import { sanitizeSessionEvents, sanitizeSessionOptions, sanitizeSignalData,

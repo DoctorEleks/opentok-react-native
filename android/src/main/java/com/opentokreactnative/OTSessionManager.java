@@ -78,7 +78,6 @@ public class OTSessionManager extends ReactContextBaseJavaModule
     public void initSession(String apiKey, String sessionId, ReadableMap sessionOptions) {
 
         final boolean useTextureViews = sessionOptions.getBoolean("useTextureViews");
-        final boolean isCamera2Capable = sessionOptions.getBoolean("isCamera2Capable");
         final boolean connectionEventsSuppressed = sessionOptions.getBoolean("connectionEventsSuppressed");
         final boolean ipWhitelist = sessionOptions.getBoolean("ipWhitelist");
         final boolean enableStereoOutput = sessionOptions.getBoolean("enableStereoOutput");
@@ -102,11 +101,6 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                     @Override
                     public boolean useTextureViews() {
                         return useTextureViews;
-                    }
-
-                    // @Override
-                    public boolean isCamera2Capable() {
-                        return isCamera2Capable;
                     }
                 })
                 .connectionEventsSuppressed(connectionEventsSuppressed)
@@ -149,6 +143,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
         String cameraPosition = properties.getString("cameraPosition");
         Boolean audioFallbackEnabled = properties.getBoolean("audioFallbackEnabled");
         int audioBitrate = properties.getInt("audioBitrate");
+        Boolean enableDtx = properties.getBoolean("enableDtx");
         String frameRate = "FPS_" + properties.getInt("frameRate");
         String resolution = properties.getString("resolution");
         Boolean publishAudio = properties.getBoolean("publishAudio");
@@ -163,6 +158,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                     .videoTrack(videoTrack)
                     .name(name)
                     .audioBitrate(audioBitrate)
+                    .enableOpusDtx(enableDtx)
                     .resolution(Publisher.CameraCaptureResolution.valueOf(resolution))
                     .frameRate(Publisher.CameraCaptureFrameRate.valueOf(frameRate))
                     .capturer(capturer)
@@ -179,6 +175,9 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                     .build();
             if (cameraPosition.equals("back")) {
                 mPublisher.cycleCamera();
+            }
+            if (mPublisher.getCapturer() != null) {
+                mPublisher.getCapturer().setVideoContentHint(Utils.convertVideoContentHint(properties.getString("videoContentHint")));
             }
         }
         mPublisher.setPublisherListener(this);
@@ -366,6 +365,16 @@ public class OTSessionManager extends ReactContextBaseJavaModule
     }
 
     @ReactMethod
+    public void changeVideoContentHint(String publisherId, String videoContentHint) {
+
+        ConcurrentHashMap<String, Publisher> mPublishers = sharedState.getPublishers();
+        Publisher mPublisher = mPublishers.get(publisherId);
+        if (mPublisher != null && mPublisher.getCapturer() != null) {
+            mPublisher.getCapturer().setVideoContentHint(Utils.convertVideoContentHint(videoContentHint));
+        }
+    }
+
+    @ReactMethod
     public void setNativeEvents(ReadableArray events) {
 
         for (int i = 0; i < events.size(); i++) {
@@ -396,6 +405,18 @@ public class OTSessionManager extends ReactContextBaseJavaModule
             componentEvents.remove(events.getString(i));
         }
     }
+
+    // Required for rn built in EventEmitter Calls.
+    @ReactMethod
+    public void addListener(String eventName) {
+
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+
+    }
+
 
     @ReactMethod
     public void sendSignal(String sessionId, ReadableMap signal, Callback callback) {

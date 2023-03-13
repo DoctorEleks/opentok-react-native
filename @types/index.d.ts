@@ -100,6 +100,11 @@ declare module "opentok-react-native" {
     connectionEventsSuppressed?: boolean;
 
     /**
+     * EU proxy server URL provided by vonage. Please check https://tokbox.com/developer/guides/eu-proxy/
+     */
+     proxyUrl?: string;
+
+     /**
      * Android only - valid options are 'mediaOverlay' or 'onTop'
      */
     androidZOrder?: "mediaOverlay" | "onTop";
@@ -115,7 +120,9 @@ declare module "opentok-react-native" {
     useTextureViews?: boolean;
 
     /**
-     * Android only - default is false
+     * Android only - default is false.
+     * Deprecated and ignored.
+     
      */
     isCamera2Capable?: boolean;
 
@@ -259,6 +266,11 @@ declare module "opentok-react-native" {
     cameraPosition?: "front" | "back";
 
     /**
+     * Whether to enable Opus DTX. The default value is false. Setting this to true can reduce bandwidth usage in streams that have long periods of silence.
+     */
+    enableDtx?: boolean;
+
+    /**
      * The desired frame rate, in frames per second, of the video. Valid values are 30, 15, 7, and 1. The published stream will use the closest value supported on the publishing client. The frame rate can differ slightly from the value you set, depending on the device of the client. And the video will only use the desired frame rate if the client configuration supports it.
      */
     frameRate?: 30 | 15 | 7 | 1;
@@ -298,7 +310,7 @@ declare module "opentok-react-native" {
     /**
      * The audio level, from 0 to 1.0. Adjust this value logarithmically for use in adjusting a user interface element, such as a volume meter. Use a moving average to smooth the data.
      */
-    audioLevel?: CallbackWithParam<string>;
+    audioLevel?: CallbackWithParam<number>;
 
     /**
      * Sent if the publisher encounters an error. After this message is sent, the publisher can be considered fully detached from a session and may be released.
